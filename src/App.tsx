@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { LectureProvider } from './contexts/LectureContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import VideoLectureList from './pages/VideoLectureList';
+import VideoLectureDetail from './pages/VideoLectureDetail';
+import About from './pages/About';
+
+const App = () => {
+    return (
+        <LectureProvider>
+            <Router>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/lectures" element={<VideoLectureList />} />
+                    <Route path="/lectures/:id" element={<VideoLectureDetail />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+                <Footer />
+            </Router>
+        </LectureProvider>
+    );
 }
 
 export default App;
